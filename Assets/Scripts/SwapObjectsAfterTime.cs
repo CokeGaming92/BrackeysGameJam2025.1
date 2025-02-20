@@ -9,13 +9,28 @@ public class SwapObjectsAfterTime : MonoBehaviour
     [SerializeField] GameObject objectToActivate;
     [SerializeField] GameObject objectToDeactivate;
 
+    private float timer;
+    private bool timesUp;
+
     // Start is called before the first frame update
     void OnEnable()
     {
-        float timer;
-
         timer = Random.Range(minTime, maxTime);
-        Invoke("SwapObjects", timer);
+        timesUp = false;
+    }
+
+    private void Update()
+    {
+        if (timesUp)
+            return;
+
+        timer -= Time.deltaTime;
+
+        if (timer <= 0)
+        {
+            timesUp = true;
+            SwapObjects();
+        }
     }
 
     private void SwapObjects()
