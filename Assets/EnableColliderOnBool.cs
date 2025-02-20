@@ -10,6 +10,7 @@ public class EnableColliderOnBool : MonoBehaviour
 
     private bool storedValue;
 
+
     private void OnEnable()
     {
         UpdateStoredBool();
@@ -29,22 +30,18 @@ public class EnableColliderOnBool : MonoBehaviour
 
     private void UpdateStoredBool()
     {
-        if ( inverse )
-            storedValue = !boolVariable.value;
-
-        else
             storedValue = boolVariable.value;
     }
 
     private void UpdateCollider()
     {
-        if  ( storedValue )
+        if  ( inverse )
         {
-            theCollider.enabled = true;
+            theCollider.enabled = !storedValue;
         }
         else
         {
-            theCollider.enabled = false;
+            theCollider.enabled = storedValue;
         }
     }
 }
